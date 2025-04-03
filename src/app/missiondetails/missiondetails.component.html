@@ -1,0 +1,33 @@
+<div class="details-container" *ngIf="mission">
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar [src]="mission.links.mission_patch_small" 
+           alt="{{ mission.mission_name }} patch"
+           onerror="this.src='assets/placeholder.png'">
+      <mat-card-title>{{ mission.mission_name }}</mat-card-title>
+      <mat-card-subtitle>Flight #{{ mission.flight_number }} ({{ mission.launch_year }})</mat-card-subtitle>
+    </mat-card-header>
+    
+    <img mat-card-image [src]="mission.links.mission_patch_small" 
+         alt="{{ mission.mission_name }} patch"
+         onerror="this.src='assets/placeholder.png'">
+    
+    <mat-card-content>
+      <h3>Rocket Details</h3>
+      <p><strong>Name:</strong> {{ mission.rocket.rocket_name }}</p>
+      <p><strong>Type:</strong> {{ mission.rocket.rocket_type }}</p>
+      
+      <h3>Launch Details</h3>
+      <p>{{ mission.details || 'No details available' }}</p>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <a mat-button [href]="mission.links.article_link" target="_blank" *ngIf="mission.links.article_link">Article</a>
+      <a mat-button [href]="mission.links.wikipedia" target="_blank" *ngIf="mission.links.wikipedia">Wikipedia</a>
+      <a mat-button [href]="mission.links.video_link" target="_blank" *ngIf="mission.links.video_link">Watch Video</a>
+      <a mat-button routerLink="/" color="primary">Back to List</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>

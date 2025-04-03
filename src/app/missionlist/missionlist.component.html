@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>SpaceX Mission Launch List</h1>
+  
+  <app-missionfilter (yearSelected)="applyFilter($event)"></app-missionfilter>
+  
+  <div class="missions-grid">
+    <mat-card *ngFor="let mission of filteredMissions" class="mission-card">
+      <mat-card-header>
+        <img mat-card-avatar [src]="mission.links.mission_patch_small" 
+             alt="{{ mission.mission_name }} patch" 
+             onerror="this.src='assets/placeholder.png'">
+        <mat-card-title>{{ mission.mission_name }}</mat-card-title>
+        <mat-card-subtitle>Flight #{{ mission.flight_number }} ({{ mission.launch_year }})</mat-card-subtitle>
+      </mat-card-header>
+      
+      <mat-card-content>
+        <p>{{ mission.details || 'No details available' }}</p>
+        <p><strong>Rocket:</strong> {{ mission.rocket.rocket_name }} ({{ mission.rocket.rocket_type }})</p>
+      </mat-card-content>
+      
+      <mat-card-actions>
+        <a mat-button [routerLink]="['/mission', mission.flight_number]" color="primary">Details</a>
+        <a mat-button [href]="mission.links.article_link" target="_blank" *ngIf="mission.links.article_link">Article</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

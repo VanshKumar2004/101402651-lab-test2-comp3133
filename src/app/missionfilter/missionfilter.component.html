@@ -1,0 +1,12 @@
+<div class="filter-container">
+  <h2>Filter by Launch Year</h2>
+  <div class="years-grid">
+    <button mat-raised-button 
+            *ngFor="let year of years" 
+            [color]="selectedYear === year ? 'primary' : 'basic'"
+            (click)="onYearSelect(year)">
+      {{ year }}
+    </button>
+  </div>
+  <button mat-button (click)="clearFilter()" *ngIf="selectedYear">Clear Filter</button>
+</div>
